@@ -9,33 +9,32 @@ import (
 
 // Warning!: Brute Force
 
-func divideable(s, start, end int) bool {
-	for start <= end {
-		if !(s%start == 0) {
+func divideable(d, e int) bool {
+	i := 1
+	for i <= e {
+		if !(d%i == 0) {
 			return false
 		}
 
-		start++
+		i++
 	}
 
 	return true
 }
 
-func iterate(max, s, e int) int {
-	found := 0
-	for i := 1; i <= max; i++ {
-		if divideable(i, s, e) && i > found {
-			found = i
+func iterate(max int) int {
+	found := 1
+	for {
+		if divideable(found, max) {
+			return found
 		}
-	}
 
-	return found
+		found++
+	}
 }
 
 func main() {
-	fmt.Println(iterate(2510, 1, 10)) // 0
-	fmt.Println(iterate(3000, 1, 10)) // 2520
-
-	fmt.Println(iterate(300000000, 1, 20)) // 232792560
+	fmt.Println(iterate(10)) // 2520
+	fmt.Println(iterate(20)) // 232792560
 
 }
